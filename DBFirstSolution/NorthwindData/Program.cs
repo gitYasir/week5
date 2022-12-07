@@ -9,15 +9,16 @@ using ( var db = new NorthwindContext() ) {
     //    );
     //}
 
-    // add
-    var newCustomer = new Customer {
-        CustomerId = "BLOGG",
-        ContactName = "Joe Bloggs",
-        CompanyName = "ToysRUs"
-    };
 
-    db.Customers.Add( newCustomer );
-    db.SaveChanges();
+    // add
+    //var newCustomer = new Customer {
+    //    CustomerId = "BLOGG",
+    //    ContactName = "Joe Bloggs",
+    //    CompanyName = "ToysRUs"
+    //};
+
+    //db.Customers.Add( newCustomer );
+    //db.SaveChanges();
 
     //var selectedCustomer = db.Customers.Find( "BLOGG" );
     //Console.WriteLine( selectedCustomer );
