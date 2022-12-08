@@ -32,16 +32,17 @@ using ( var db = new AcademyContext() ) {
     //var updatedTrainee = db.Trainees.Find( 4 );
     //Console.WriteLine( updatedTrainee );
 
-    var traineeToDelete = db.Trainees.Find( 4 );
-    db.Trainees.Remove( traineeToDelete );
-    db.SaveChanges();
+    // Delete treainee
+    //var traineeToDelete = db.Trainees.Find( 4 );
+    //db.Trainees.Remove( traineeToDelete );
+    //db.SaveChanges();
 
-    var deletedTrainee = db.Trainees.Find( 4 );
-    if ( deletedTrainee == null ) {
-        Console.WriteLine( "Successfull Deleted" );
-    }
-    else {
-        Console.WriteLine( "Trainee Not Deleted" );
-    }
+    //var deletedTrainee = db.Trainees.Find( 4 );
+    //if ( deletedTrainee == null ) {
+    //    Console.WriteLine( "Successfull Deleted" );
+    //}
+    //else {
+    //    Console.WriteLine( "Trainee Not Deleted" );
+    //}
 
 }
