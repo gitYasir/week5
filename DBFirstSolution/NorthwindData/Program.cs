@@ -1,4 +1,5 @@
-﻿using NorthwindData;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthwindData;
 using NorthwindData.Models;
 using System.Collections.Generic;
 
@@ -101,11 +102,45 @@ using ( var db = new NorthwindContext() ) {
     //    Console.WriteLine( group );
     //}
 
-    var order = db.Products.OrderBy( p => p.QuantityPerUnit ).ThenByDescending( p => p.ReorderLevel );
+    //var order = db.Products.OrderBy( p => p.QuantityPerUnit ).ThenByDescending( p => p.ReorderLevel );
 
-    foreach ( var item in order ) {
-        Console.WriteLine( item );
+    //foreach ( var item in order ) {
+    //    Console.WriteLine( item );
+    //}
+
+    //var orders = db.Orders
+    //.Include( o => o.Customer )
+    //.Include( o => o.OrderDetails )
+    //    .Where( o => o.Freight > 750 );
+
+    //foreach ( var order in orders ) {
+    //    if ( order.Customer != null )
+    //        Console.WriteLine( $"Order {order.OrderId} was made by {order.Customer.ContactName} of {order.Customer.CompanyName}" );
+
+    //    foreach ( var item in order.OrderDetails ) {
+    //        Console.WriteLine( $"Product: {item.ProductId} - Quantity: {item.Quantity}" );
+    //    }
+    //}
+
+    var orders = db.Orders
+    .Include( o => o.Customer )
+    .Include( o => o.OrderDetails )
+    .ThenInclude( od => od.Product )
+    .Where( o => o.Freight > 750 )
+    .Select( o => o );
+
+    foreach ( var order in orders ) {
+        Console.WriteLine( $"Order {order.OrderId} " +
+                $"was made by {order.Customer.ContactName} " +
+                $"of {order.Customer.CompanyName}" );
+
+        foreach ( var od in order.OrderDetails ) {
+            Console.WriteLine( $"\t Product: {od.ProductId} " +
+                $"- {od.Product.ProductName} " +
+                $"- Quantity {od.Quantity}" );
+        }
     }
+
     #endregion
 }
 //  Count of even numbers (should be 4)
