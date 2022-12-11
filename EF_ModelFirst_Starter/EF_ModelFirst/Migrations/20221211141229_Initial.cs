@@ -18,7 +18,8 @@ namespace EFModelFirst.Migrations
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ContactName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

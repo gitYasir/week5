@@ -28,11 +28,11 @@ namespace EF_ModelFirst {
                 //    cust.City = "Brighton";
                 //}
 
-                db.SaveChanges();
-                // read current customers table records
-                foreach ( var cust in db.Customers ) {
-                    Console.WriteLine( $"Customer ID: {cust.CustomerId} Name: {cust.ContactName} City: {cust.City} Postcode: {cust.PostalCode}" );
-                }
+                //db.SaveChanges();
+                //read current customers table records
+                //foreach ( var cust in db.Customers ) {
+                //    Console.WriteLine( $"Customer ID: {cust.CustomerId} Name: {cust.ContactName} City: {cust.City} Postcode: {cust.PostalCode}" );
+                //}
 
             }
         }

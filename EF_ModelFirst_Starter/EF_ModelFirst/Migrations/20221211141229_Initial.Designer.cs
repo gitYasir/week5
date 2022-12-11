@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFModelFirst.Migrations
 {
     [DbContext(typeof(SouthwindContext))]
-    [Migration("20221209142110_Initial")]
+    [Migration("20221211141229_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace EFModelFirst.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")

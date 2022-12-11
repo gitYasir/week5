@@ -33,12 +33,15 @@ namespace EFModelFirst.Migrations
                     b.Property<string>("ContactName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("EF_ModelFirst.Order", b =>
@@ -65,7 +68,7 @@ namespace EFModelFirst.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("EF_ModelFirst.OrderDetail", b =>
@@ -92,7 +95,7 @@ namespace EFModelFirst.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("EF_ModelFirst.Order", b =>
