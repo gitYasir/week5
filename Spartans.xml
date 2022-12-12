@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<academy title="Sparta Global Academy">
+    <spartan stream="Engineering">
+        <name>Yasir</name>
+        <course>C#DEV</course>
+        <location>Birmingham</location>
+    </spartan>
+	<spartan stream="Engineering">
+		<name>Stef</name>
+        <course>C#DEV</course>
+        <location>Brighton</location>
+    </spartan>
+	<spartan stream="Engineering">
+		<name>Shehaad</name>
+        <course>C#DEV</course>
+        <location>London</location>
+    </spartan>
+</academy>
