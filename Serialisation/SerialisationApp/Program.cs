@@ -16,11 +16,12 @@
             eng152.AddTrainee( trainee );
             eng152.AddTrainee( new Trainee { FirstName = "Laura", LastName = "Tozer", SpartaNo = 1 } );
 
-            var serialiser = new SerialiserJson();
+            var serialiser = new SerialiserXML();
             var serialiserJson = new SerialiserJson();
 
             string fullTraineePathXML = path + "\\Trainee.xml";
             string fullCoursePathhXML = path + "\\course.xml";
+
             Serialise( trainee, serialiser, fullTraineePathXML );
             Trainee traineeDeserialisedXML = Deserialise<Trainee>( serialiser, fullTraineePathXML );
             Serialise( eng152, serialiser, fullCoursePathhXML );
