@@ -16,16 +16,28 @@
             eng152.AddTrainee( trainee );
             eng152.AddTrainee( new Trainee { FirstName = "Laura", LastName = "Tozer", SpartaNo = 1 } );
 
+            var serialiser = new SerialiserJson();
             var serialiserJson = new SerialiserJson();
 
-            string fullTraineePathXML = path + "\\Trainee.json";
-            Serialise( trainee, serialiserJson, fullTraineePathXML );
-            Trainee traineeDeserialisedJson = Deserialise<Trainee>( serialiserJson, fullTraineePathXML );
-            Serialise( eng152, serialiserJson, fullTraineePathXML );
-            Course course = Deserialise<Course>( serialiserJson, fullTraineePathXML );
+            string fullTraineePathXML = path + "\\Trainee.xml";
+            string fullCoursePathhXML = path + "\\course.xml";
+            Serialise( trainee, serialiser, fullTraineePathXML );
+            Trainee traineeDeserialisedXML = Deserialise<Trainee>( serialiser, fullTraineePathXML );
+            Serialise( eng152, serialiser, fullCoursePathhXML );
+            Course courseXML = Deserialise<Course>( serialiser, fullCoursePathhXML );
+
+            string fullTraineePathJson = path + "\\Trainee.json";
+            string fullCoursePathhJson = path + "\\course.json";
+            Serialise( trainee, serialiserJson, fullTraineePathJson );
+            Trainee traineeDeserialisedJson = Deserialise<Trainee>( serialiserJson, fullTraineePathJson );
+            Serialise( eng152, serialiserJson, fullCoursePathhJson );
+            Course courseJson = Deserialise<Course>( serialiserJson, fullCoursePathhJson );
+
+            Console.WriteLine( traineeDeserialisedXML );
+            Console.WriteLine( courseXML );
 
             Console.WriteLine( traineeDeserialisedJson );
-            Console.WriteLine( course );
+            Console.WriteLine( courseJson );
 
 
             static T Deserialise<T>( ISerialiser serialiserJson, string fromPath ) {
