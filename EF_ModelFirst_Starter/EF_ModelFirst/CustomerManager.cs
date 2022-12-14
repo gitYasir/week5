@@ -1,63 +1,55 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EF_ModelFirst.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace EF_ModelFirst {
     public class CustomerManager {
+        private ICustomerServices _service;
         public CustomerManager() {
+            _service = new CustomerServices();
+        }
+        public CustomerManager( ICustomerServices service ) {
+            if ( service == null ) {
+                throw new ArgumentException( "ICustomerService object cannot be null" );
+            }
+            _service = service;
         }
 
-        public static void CreateCustomer( Customer cust ) {
-            using ( var db = new SouthwindContext() ) {
-                // create customer
-                var query = db.Customers.Add( cust );
-                db.SaveChanges();
-            }
+        public Customer SelectedCustomer { get; set; }
+
+        public void SetSelectedCustomer( object selectedItem ) {
+            SelectedCustomer = ( Customer ) selectedItem;
         }
 
-        public static void ReadCustomers() {
-            using ( var db = new SouthwindContext() ) {
-                //read current customers table records
-                foreach ( var cus in db.Customers ) {
-                    Console.WriteLine( $"Customer ID: {cus.CustomerId} Name: {cus.ContactName} City: {cus.City} Postcode: {cus.PostalCode} Country: {cus.Country}" );
-                }
-            }
+
+        public void CreateCustomer( string customerId, string contactName, string country, string postCode, string city = null ) {
+            var newCust = new Customer() { CustomerId = customerId, ContactName = contactName, PostalCode = postCode, City = city, Country = country };
+            _service.CreateCustomer( newCust );
         }
 
-        public static void UpdateCustomer( Customer updatedCust ) {
-            using ( var db = new SouthwindContext() ) {
-                // update customer
-                var query = db.Customers
-                 .Where( w => w.CustomerId == updatedCust.CustomerId );
-
-                foreach ( var cust in query ) {
-                    if ( cust.ContactName != updatedCust.ContactName ) {
-                        cust.ContactName = updatedCust.ContactName;
-                    }
-                    else if ( cust.City != updatedCust.City ) {
-                        cust.City = updatedCust.City;
-                    }
-                    else if ( cust.PostalCode != updatedCust.PostalCode ) {
-                        cust.PostalCode = updatedCust.PostalCode;
-                    }
-                    else if ( cust.Country != updatedCust.Country ) {
-                        cust.Country = updatedCust.Country;
-                    }
-                }
-
-                db.SaveChanges();
-            }
+        public List<Customer> ReadCustomers() {
+            return _service.GetCustomerList();
         }
 
-        public static void DeleteCustomer( string id ) {
-            using ( var db = new SouthwindContext() ) {
-                // delete customer
-                var query = db.Customers.Where( w => w.CustomerId == id ).ExecuteDelete();
-                db.SaveChanges();
+        public bool UpdateCustomer( Customer updatedCust ) {
+            var cust = _service.GetCustomerById( updatedCust.CustomerId );
+            if ( cust == null ) {
+                Debug.WriteLine( $"Customer {updatedCust.CustomerId} not found" );
+                return false;
             }
+            cust.ContactName = updatedCust.ContactName;
+            cust.City = updatedCust.City;
+            cust.PostalCode = updatedCust.PostalCode;
+            cust.Country = updatedCust.Country;
+
+            _service.SaveCustomerChanges();
+            return true;
+        }
+
+        public void DeleteCustomer( string id ) {
+            var cust = _service.GetCustomerById( id );
+            _service.RemoveCustomer( cust );
         }
     }
 
